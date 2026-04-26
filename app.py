@@ -190,5 +190,4 @@ def profile(username):
 
     return render_template("profile.html", posts=posts, username=username)
 if __name__ == "__main__":
-    print("Starting Flask server...")
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000)
