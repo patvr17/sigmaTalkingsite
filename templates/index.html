@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<header>
+    <h1>Welcome {{ user }}</h1>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/logout">Logout</a>
+    </nav>
+</header>
+
+<div class="container">
+
+    <form action="/submit" method="POST">
+        <textarea name="message" placeholder="Write something..." required></textarea><br>
+        <button type="submit">Post</button>
+    </form>
+
+    <hr>
+
+    <h2>Posts</h2>
+
+{% for post in posts %}
+
+<div style="border:1px solid #444; margin:10px; padding:10px;">
+
+    <a href="/user/{{ post[1] }}"><strong>{{ post[1] }}</strong></a>
+    • {{ post[3] }}
+
+    <p>{{ post[2] }}</p>
+
+    <p>❤️ {{ post[4] }} likes</p>
+
+    <a href="/like/{{ post[0] }}">Like</a>
+
+    {% if post[1] == user %}
+        | <a href="/delete/{{ post[0] }}">Delete</a>
+    {% endif %}
+
+</div>
+
+{% endfor %}
+
+</div>
+
+</body>
+</html>
